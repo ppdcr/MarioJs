@@ -1,0 +1,267 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.game-board {
+  width: 100vw;
+  height: 80vh;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+
+}
+
+.informacoes {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 300px 300px;
+  justify-content: space-between;
+  
+}
+
+.esquerda {
+  text-align: left;
+}
+
+.direita {
+  text-align: right;
+}
+
+.perdeu {
+  background: linear-gradient(#FFB6C1, #FF69B4);
+  border-bottom: 15px solid rgb(255, 0, 0);
+}
+
+.dia {
+    border-bottom: 15px solid rgb(13, 161, 0);
+    background: linear-gradient(#87CEEB, #ffffff);
+}
+
+.dia-noite {
+  animation: diaPraNoite 0.5s linear;
+}
+
+.noite {
+    border-bottom: 15px solid rgb(36, 28, 26);
+    background: linear-gradient(#000000, #8c4fff);
+}
+
+.noite-dia {
+  animation: noiteProDia 0.5s linear;
+}
+
+h2 {
+  color: rgb(0, 59, 0)
+}
+
+.cano {
+  position: absolute;
+  bottom: 0;
+  width: 80px;
+  right: 0;
+}
+
+.cano-animado {
+  animation: animacao-cano 2s infinite linear;
+}
+
+.nuvens {
+  position: absolute;
+  width: 400px;
+  top: 0;
+  margin-top: 20px;
+  right: 0;
+}
+
+.nuvens-animadas {
+  animation: animacao-nuvens 2s infinite linear;
+}
+
+.mario {
+  width: 150px;
+  position: absolute;
+  bottom: 0;
+}
+
+.pulo {
+  animation: pulo 0.5s ease-out;    
+}
+
+.piscar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  font-size: 40px;
+  color: #ffffff;
+  text-shadow: 2px 2px #ff0000;
+  animation: piscar 1.5s infinite;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+@keyframes piscar {
+  0% {
+    opacity: 1;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes animacao-cano {
+  from {
+    right: -80px;
+  }
+
+  to {
+    right: 100%;
+  }
+}
+
+@keyframes animacao-nuvens {
+  from {
+    right: -500px;
+  }
+
+  to {
+    right: 100%;
+  }
+}
+
+@keyframes pulo {
+  0% {
+    bottom: 0;
+  }
+
+  40% {
+    bottom: 180px;
+  }
+
+  50% {
+    bottom: 180px;
+  }
+
+  60% {
+    bottom: 180px;
+  }
+
+  100% {
+    bottom: 0;
+  }
+}
+
+@keyframes noiteProDia {
+  0% {
+    border-bottom: 15px solid rgb(36, 28, 26);
+    background: linear-gradient(#000000, #8c4fff);
+  }
+  10% {
+    border-bottom: 15px solid rgb(41, 31, 22);
+    background: linear-gradient(#131e22, #9962ff);
+  }
+  20% {
+    border-bottom: 15px solid rgb(63, 44, 20);
+    background: linear-gradient(#1f3036, #a676ff);
+  }
+  30% {
+    border-bottom: 15px solid rgb(61, 55, 0);
+    background: linear-gradient(#2b424b, #af84ff);
+  }
+  40% {
+    border-bottom: 15px solid rgb(50, 61, 0);
+    background: linear-gradient(#395763, #ba95ff);
+  }
+  50% {
+    border-bottom: 15px solid rgb(43, 61, 0);
+    background: linear-gradient(#456977, #c7aafd);
+  }
+  60% {
+    border-bottom: 15px solid rgb(38, 61, 0);
+    background: linear-gradient(#50798a, #d0b8fd);
+  }
+  70% {
+    border-bottom: 15px solid rgb(55, 85, 0);
+    background: linear-gradient(#5b899c, #ddcaff);
+  }
+  80% {
+    border-bottom: 15px solid rgb(36, 90, 0);
+    background: linear-gradient(#699eb4, #e2d3fd);
+  }
+  90% {
+    border-bottom: 15px solid rgb(32, 114, 0);
+    background: linear-gradient(#76b1ca, #f0e9ff);
+  }
+  100% {
+    border-bottom: 15px solid rgb(13, 161, 0);
+    background: linear-gradient(#87CEEB, #ffffff);
+  }
+} 
+
+@keyframes diaPraNoite {
+  0% {    
+    border-bottom: 15px solid rgb(13, 161, 0);
+    background: linear-gradient(#87CEEB, #ffffff);
+  }
+  10% {
+    border-bottom: 15px solid rgb(32, 114, 0);
+    background: linear-gradient(#76b1ca, #f0e9ff);
+  }
+  20% {
+    border-bottom: 15px solid rgb(36, 90, 0);
+    background: linear-gradient(#699eb4, #e2d3fd);
+  }
+  30% {
+    border-bottom: 15px solid rgb(55, 85, 0);
+    background: linear-gradient(#5b899c, #ddcaff);
+  }
+  40% {
+    border-bottom: 15px solid rgb(38, 61, 0);
+    background: linear-gradient(#50798a, #d0b8fd);
+  }
+  50% {
+    border-bottom: 15px solid rgb(43, 61, 0);
+    background: linear-gradient(#456977, #c7aafd);
+  }
+  60% {
+    border-bottom: 15px solid rgb(50, 61, 0);
+    background: linear-gradient(#395763, #ba95ff);
+  }
+  70% {
+    border-bottom: 15px solid rgb(61, 55, 0);
+    background: linear-gradient(#2b424b, #af84ff);
+  }
+  80% {
+    border-bottom: 15px solid rgb(63, 44, 20);
+    background: linear-gradient(#1f3036, #a676ff);
+  }
+  90% {
+    border-bottom: 15px solid rgb(41, 31, 22);
+    background: linear-gradient(#131e22, #9962ff);
+  }
+  100% {
+    border-bottom: 15px solid rgb(36, 28, 26);
+    background: linear-gradient(#000000, #8c4fff);
+  }
+}
