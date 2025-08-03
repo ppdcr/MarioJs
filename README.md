@@ -1,2 +1,2 @@
 # MarioJs
-Jogo clássico do Super Mario Bros em JavaScript.
+Jogo do clássico Super Mario Bros em JavaScript.
