@@ -15,6 +15,7 @@ function App() {
   const nuvens = useRef(null)
   const mario = useRef(null)
   const gameBoard = useRef(null)
+  const bloco = useRef(null)
   
   useEffect(() => {
     if (tentativas == 0) return
@@ -83,12 +84,13 @@ function App() {
       }
 
       if (!cenario) {
-        setVelocidade(prev => prev + 0.0001)
-        cano.current.style.animationDuration = `${2 - (velocidade)}s`
-        nuvens.current.style.animationDuration = `${2 - (velocidade)}s`
+        setVelocidade(prev => prev + 0.00015)
       }
+      cano.current.style.animationDuration = `${2 - (velocidade)}s`
+      nuvens.current.style.animationDuration = `${2 - (velocidade)}s`
 
       const posicaoMario = +window.getComputedStyle(mario.current).bottom.replace('px', '')
+      
       const posicaoCano = cano.current.offsetLeft
       const posicaoNuvens = nuvens.current.offsetLeft
 
@@ -120,6 +122,7 @@ function App() {
         ${!comecou && tentativas != 0 ? 'perdeu' : ''}
         ${cenario ? 'dia' : 'noite'}`}>
         <img ref={mario} src="./imagens/mario.gif" alt='mario' className="mario"/>
+        <img ref={bloco} src='./imagens/block.png' alt='bloco' className={`bloco ${comecou ? 'bloco-animado' : ''}`}/>
         <img ref={cano} src="./imagens/pipe.png" alt='cano' className={`cano ${comecou ? 'cano-animado' : ''}`}/>
         <img ref={nuvens} src="./imagens/clouds.png" alt='nuvens' className={`nuvens ${comecou ? 'nuvens-animadas' : ''}`}/>
       </div>
@@ -136,7 +139,6 @@ function App() {
         </div>
       </div>
         
-      
     </>
   )
 }

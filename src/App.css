@@ -56,6 +56,17 @@ h2 {
   color: rgb(0, 59, 0)
 }
 
+.bloco {
+  position: absolute;
+  bottom: 250px;
+  width: 100px;
+  right: 0;
+}
+
+.bloco-animado {
+  animation: animacao-bloco 3s infinite linear;
+}
+
 .cano {
   position: absolute;
   bottom: 0;
@@ -147,6 +158,16 @@ h2 {
 
   to {
     right: 100%;
+  }
+}
+
+@keyframes animacao-bloco {
+  from {
+    right: -100px
+  }
+
+  to {
+    right: 100%
   }
 }
 
