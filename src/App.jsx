@@ -10,13 +10,25 @@ function App() {
   const [cenario, setCenario] = useState(true)
   const [tempo, setTempo] = useState(0)
   const [velocidade, setVelocidade] = useState(0)
+  const [acertouBloco, setAcertouBloco] = useState(false)
 
   const cano = useRef(null)
   const nuvens = useRef(null)
   const mario = useRef(null)
   const gameBoard = useRef(null)
   const bloco = useRef(null)
+  const pontosBloco = useRef(null)
   
+  useEffect(() => {
+    setTimeout(() => {
+      if (!acertouBloco) return
+      setAcertouBloco(false)
+      pontosBloco.current.src = ''
+      pontosBloco.current.style = ''
+      bloco.current.src = './imagens/bloco-morto.gif'
+    }, 2000)
+  }, [acertouBloco])
+
   useEffect(() => {
     if (tentativas == 0) return
     if (cenario) {
@@ -86,30 +98,49 @@ function App() {
       if (!cenario) {
         setVelocidade(prev => prev + 0.00015)
       }
+
       cano.current.style.animationDuration = `${2 - (velocidade)}s`
       nuvens.current.style.animationDuration = `${2 - (velocidade)}s`
 
-      const posicaoMario = +window.getComputedStyle(mario.current).bottom.replace('px', '')
-      
-      const posicaoCano = cano.current.offsetLeft
-      const posicaoNuvens = nuvens.current.offsetLeft
+      const posicaoEmbaixoMario = +window.getComputedStyle(mario.current).bottom.replace('px', '') // posicao do pé do mario
 
-      if (posicaoCano <= 120 && posicaoCano > 0 && posicaoMario < 80) {
+      const posicaoEsquerdaBloco = bloco.current.offsetLeft // posicao do bloco
 
-        mario.current.style.bottom = `${posicaoMario}px`
-        mario.current.style.animation = 'none'
+      const posicaoEsquerdaCano = cano.current.offsetLeft // posicao cano
+
+      const posicaoEsquerdaNuvens = nuvens.current.offsetLeft //posicao nuvem
+
+      if (posicaoEsquerdaCano <= 120 && posicaoEsquerdaCano > 0 && posicaoEmbaixoMario < 100) {
+        setComecou(false)
+        mario.current.style.bottom = `${posicaoEmbaixoMario}px`
         mario.current.src = "./imagens/game-over.png"
         mario.current.style.width = "75px"
         mario.current.style.marginLeft = "50px"
-        mario.current.style.marginBottom = "20px"
 
-        cano.current.style.animation = 'none'
-        cano.current.style.left = `${posicaoCano}px`
+        cano.current.style.left = `${posicaoEsquerdaCano}px`
 
-        nuvens.current.style.animation = 'none'
-        nuvens.current.style.left = `${posicaoNuvens}px`
+        nuvens.current.style.left = `${posicaoEsquerdaNuvens}px`
 
-        setComecou(false)
+        bloco.current.style.left = `${posicaoEsquerdaBloco}px`
+
+      }
+
+      if (posicaoEmbaixoMario >= 130 && posicaoEsquerdaBloco <= 120 && posicaoEsquerdaBloco > 0) {
+        console.log("oi")
+        const listaImagens = ['cem', 'duzentos', 'trezentos', 'quatrocentos', 'quinhentos']
+        let numero = Math.floor(Math.random() * 5)
+        
+        pontosBloco.current?.style.left = `${posicaoEsquerdaBloco}px`
+        pontosBloco.current?.src = `./imagens/${listaImagens[numero]}-pontos.gif`
+
+        bloco.current.src = './imagens/bloco-transicao.gif'
+        numero++
+        if (melhorPontuacao == pontos) {
+          setMelhorPontuacao(prev => prev + numero * 100)
+        }
+
+        setPontos(prev => prev + numero * 100)
+        setAcertouBloco(true)
       }
     }, 10)
     return () => clearInterval(loop)
@@ -122,7 +153,8 @@ function App() {
         ${!comecou && tentativas != 0 ? 'perdeu' : ''}
         ${cenario ? 'dia' : 'noite'}`}>
         <img ref={mario} src="./imagens/mario.gif" alt='mario' className="mario"/>
-        <img ref={bloco} src='./imagens/block.png' alt='bloco' className={`bloco ${comecou ? 'bloco-animado' : ''}`}/>
+        {acertouBloco && <img ref={pontosBloco} alt='pontosBloco' className="pontosBloco"></img>}
+        <img ref={bloco} src='./imagens/bloco-vivo.gif' alt='bloco' className={`bloco ${comecou ? 'bloco-animado' : ''}`}/>
         <img ref={cano} src="./imagens/pipe.png" alt='cano' className={`cano ${comecou ? 'cano-animado' : ''}`}/>
         <img ref={nuvens} src="./imagens/clouds.png" alt='nuvens' className={`nuvens ${comecou ? 'nuvens-animadas' : ''}`}/>
       </div>

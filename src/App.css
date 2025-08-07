@@ -58,19 +58,25 @@ h2 {
 
 .bloco {
   position: absolute;
-  bottom: 250px;
-  width: 100px;
-  right: 0;
+  bottom: 200px;
+  width: 150px;
+  right: -150px;
 }
 
 .bloco-animado {
   animation: animacao-bloco 3s infinite linear;
 }
 
+.pontosBloco {
+  position: absolute;
+  bottom: 400px;
+  width: 100px;
+}
+
 .cano {
   position: absolute;
   bottom: 0;
-  width: 80px;
+  width: 100px;
   right: 0;
 }
 
