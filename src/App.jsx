@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef, use} from 'react'
+import { useState, useEffect, useRef} from 'react'
 import './App.css'
 
 function App() {
 
+  // variaveis de funcionamento
   const [comecou, setComecou] = useState(false)
   const [tentativas, setTentativas] = useState(0)
   const [pontos, setPontos] = useState(0)
@@ -12,6 +13,7 @@ function App() {
   const [velocidade, setVelocidade] = useState(0)
   const [acertouBloco, setAcertouBloco] = useState(false)
 
+  // variaveis de objetos
   const cano = useRef(null)
   const nuvens = useRef(null)
   const mario = useRef(null)
@@ -19,6 +21,7 @@ function App() {
   const bloco = useRef(null)
   const pontosBloco = useRef(null)
   
+  // acertou o bloco
   useEffect(() => {
     setTimeout(() => {
       if (!acertouBloco) return
@@ -29,6 +32,7 @@ function App() {
     }, 2000)
   }, [acertouBloco])
 
+  // muda a cor do cenario
   useEffect(() => {
     if (tentativas == 0) return
     if (cenario) {
@@ -46,6 +50,7 @@ function App() {
     }
   }, [cenario])
 
+  // muda o cenario
   useEffect(() => {
     if (!comecou) return
     const mudaCenario = setTimeout(() => {
@@ -54,6 +59,7 @@ function App() {
     return () => clearTimeout(mudaCenario)
   }, [comecou, cenario])
 
+  // pula / comeca o jogo
   useEffect(() => {
     function pular(e) {
       if (e.code === 'Space') {
@@ -86,6 +92,7 @@ function App() {
     return () => window.removeEventListener('keydown', pular)
   }, [comecou, mario])
 
+  // jogada
   useEffect(() => {
     if (!comecou) return
     const loop = setInterval(() => {
